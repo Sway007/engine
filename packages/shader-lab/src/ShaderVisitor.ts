@@ -181,7 +181,6 @@ export class ShaderVisitor extends ShaderVisitorConstructor implements Partial<I
       variables: ctx._ruleShaderPropertyDeclare?.map((item) => this.visit(item) as any),
       functions: ctx._ruleFn?.map((item) => this.visit(item)),
       structs: ctx._ruleStruct?.map((item) => this.visit(item)),
-      tags: ctx._ruleTag ? (this.visit(ctx._ruleTag) as TagAstNode) : undefined,
       renderStates: ctx._ruleRenderStateDeclaration?.map((item) => this.visit(item))
     });
   }

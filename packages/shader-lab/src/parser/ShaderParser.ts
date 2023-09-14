@@ -30,7 +30,6 @@ export class ShaderParser extends CstParser {
         { ALT: () => this.SUBRULE(this._ruleProperty) },
         { ALT: () => this.SUBRULE(this._ruleSubShader) },
         { ALT: () => this.SUBRULE(this._ruleRenderStateDeclaration) },
-        { ALT: () => this.SUBRULE(this._ruleTag) },
         { ALT: () => this.SUBRULE(this._ruleStruct) },
         { ALT: () => this.SUBRULE(this._ruleFn) },
         { ALT: () => this.SUBRULE(this._ruleShaderPropertyDeclare) }

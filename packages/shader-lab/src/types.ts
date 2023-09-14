@@ -12,7 +12,6 @@ export type _ruleShaderCstChildren = {
   _ruleProperty?: _rulePropertyCstNode[];
   _ruleSubShader?: _ruleSubShaderCstNode[];
   _ruleRenderStateDeclaration?: _ruleRenderStateDeclarationCstNode[];
-  _ruleTag?: _ruleTagCstNode[];
   _ruleStruct?: _ruleStructCstNode[];
   _ruleFn?: _ruleFnCstNode[];
   _ruleShaderPropertyDeclare?: _ruleShaderPropertyDeclareCstNode[];

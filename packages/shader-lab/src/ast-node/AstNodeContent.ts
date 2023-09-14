@@ -53,7 +53,6 @@ export interface IShaderAstContent {
   functions?: FnAstNode[];
   renderStates?: RenderStateDeclarationAstNode[];
   structs?: StructAstNode[];
-  tags?: TagAstNode;
   variables?: ShaderPropertyDeclareAstNode[];
 }
 
