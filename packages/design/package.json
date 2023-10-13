@@ -18,5 +18,8 @@
   "types": "types/index.d.ts",
   "dependencies": {
     "@galacean/engine-math": "workspace:*"
+  },
+  "devDependencies": {
+    "chevrotain": "^10.5.0"
   }
 }

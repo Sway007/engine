@@ -1,7 +1,7 @@
 import { _ruleFnMacroCstChildren } from "../types";
 import {
   AstNode,
-  PropertyItemAstNode,
+  // PropertyItemAstNode,
   TagAstNode,
   PassPropertyAssignmentAstNode,
   StructAstNode,
@@ -48,13 +48,13 @@ import {
 
 export interface IShaderAstContent {
   name: string;
-  editorProperties?: AstNode<PropertyItemAstNode[]>;
   subShader: AstNode<ISubShaderAstContent>[];
   functions?: FnAstNode[];
   renderStates?: RenderStateDeclarationAstNode[];
   structs?: StructAstNode[];
   tags?: TagAstNode;
   variables?: ShaderPropertyDeclareAstNode[];
+  pluginRes?: any;
 }
 
 export interface IPropertyItemAstContent {
@@ -72,6 +72,7 @@ export interface ISubShaderAstContent {
   renderStates?: RenderStateDeclarationAstNode[];
   structs?: StructAstNode[];
   variables?: ShaderPropertyDeclareAstNode[];
+  pluginRes?: any;
 }
 
 export interface IFunctionAstContent {
@@ -94,6 +95,7 @@ export interface IPassAstContent {
   macros?: FnMacroAstNode[];
   conditionalMacros?: FnMacroConditionAstNode[];
   renderQueue?: RenderQueueValueAstNode;
+  pluginRes?: any;
 }
 
 export type IUsePassAstContent = string;
@@ -311,7 +313,7 @@ export interface ITagAssignmentAstContent {
 
 export type ITagAstContent = TagAssignmentAstNode[];
 
-export type IPropertyAstContent = PropertyItemAstNode[];
+// export type IPropertyAstContent = PropertyItemAstNode[];
 
 export type ITupleNumber4 = [number, number, number, number];
 export type ITupleNumber3 = [number, number, number];

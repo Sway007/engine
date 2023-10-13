@@ -4,4 +4,5 @@ export interface ISubShaderInfo {
   name: string;
   passes: (IShaderPassInfo | string)[];
   tags?: Record<string, number | string | boolean>;
+  pluginRes?: any;
 }

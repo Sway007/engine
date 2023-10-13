@@ -24,6 +24,7 @@ import {
 } from "./ast-node";
 import { AstNodeUtils } from "./AstNodeUtils";
 import { RenderStateDataKey } from "@galacean/engine";
+import { ShaderParseResult } from "./parser/ShaderParseResult";
 
 export interface IDiagnostic {
   severity: DiagnosticSeverity;
@@ -126,11 +127,8 @@ export default class RuntimeContext {
     this._shaderReset();
 
     this._initShaderGlobalList(ast);
-    const ret = {} as IShaderInfo;
-    ret.name = ast.content.name;
-    ret.subShaders = ast.content.subShader.map((ast) => this.parseSubShaderInfo(ast));
 
-    return ret;
+    return new ShaderParseResult(ast, this);
   }
 
   parseSubShaderInfo(ast: AstNode<ISubShaderAstContent>): ISubShaderInfo {

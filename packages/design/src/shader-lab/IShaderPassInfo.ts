@@ -11,4 +11,5 @@ export interface IShaderPassInfo {
     /** Variable RenderState. */
     Record<number, string>
   ];
+  pluginRes?: any;
 }

@@ -6,12 +6,13 @@ import { exec } from "child_process";
 import path from "path";
 import fs from "fs";
 
-function generateDiagram(opts?: { outDir?: string; pattern?: RegExp }) {
+export function generateDiagram(opts?: { outDir?: string; pattern?: RegExp; parser?: ShaderParser }) {
   const out = opts?.outDir ?? path.join(__dirname, "../doc");
   if (!fs.existsSync(out)) {
     fs.mkdirSync(out);
   }
-  const parser = new ShaderParser();
+
+  const parser = opts?.parser ?? new ShaderParser();
 
   const serializeGrammar = parser.getSerializedGastProductions();
   const html = createSyntaxDiagramsCode(

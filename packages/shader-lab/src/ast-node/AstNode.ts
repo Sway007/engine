@@ -55,8 +55,8 @@ import {
   IParenthesisAtomicAstContent,
   IPassPropertyAssignmentAstContent,
   IPrecisionAstContent,
-  IPropertyAstContent,
-  IPropertyItemAstContent,
+  // IPropertyAstContent,
+  // IPropertyItemAstContent,
   IRelationOperatorAstContent,
   IRenderQueueAstContent,
   IRenderStateDeclarationAstContent,
@@ -680,9 +680,9 @@ export class TagAstNode extends AstNode<ITagAstContent> {
   }
 }
 
-export class PropertyItemAstNode extends AstNode<IPropertyItemAstContent> {}
+// export class PropertyItemAstNode extends AstNode<IPropertyItemAstContent> {}
 
-export class PropertyAstNode extends AstNode<IPropertyAstContent> {}
+// export class PropertyAstNode extends AstNode<IPropertyAstContent> {}
 
 export class TupleNumber4AstNode extends AstNode<ITupleNumber4> {}
 
@@ -690,7 +690,7 @@ export class TupleNumber3AstNode extends AstNode<ITupleNumber3> {}
 
 export class TupleNumber2AstNode extends AstNode<ITupleNumber2> {}
 
-export class RangeAstNode extends AstNode<ITupleNumber2> {}
+// export class RangeAstNode extends AstNode<ITupleNumber2> {}
 
 export class CullModeAstNode extends AstNode<ICullModeAstContent> {
   override getContentValue() {
