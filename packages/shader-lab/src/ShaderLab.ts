@@ -17,6 +17,8 @@ export class ShaderLab implements IShaderLab {
   }
 
   parseShader(shaderSource: string) {
-    return AstNodeUtils.parseShader(shaderSource, this._parser, this._visitor);
+    const editorPropertiesRegex = /EditorProperties\s+\{[^}]*?\}/;
+
+    return AstNodeUtils.parseShader(shaderSource.replace(editorPropertiesRegex, ""), this._parser, this._visitor);
   }
 }

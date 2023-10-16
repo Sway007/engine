@@ -107,6 +107,8 @@ export class AstNodeUtils {
     parser.parse(input);
     const cst = parser.ruleShader();
     if (parser.errors.length > 0) {
+      debugger;
+      console.log(input);
       console.log(parser.errors);
       throw parser.errors;
     }
