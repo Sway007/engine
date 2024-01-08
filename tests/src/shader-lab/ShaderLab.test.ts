@@ -217,6 +217,11 @@ describe("ShaderLab", () => {
     glslValidate(demoShader, shaderLab);
   });
 
+  it("grass shader", () => {
+    const demoShader = fs.readFileSync(path.join(__dirname, "shaders/grass.shader")).toString();
+    glslValidate(demoShader, shaderLab);
+  });
+
   it("shader with duplicate name", () => {
     const demoShader = fs.readFileSync(path.join(__dirname, "shaders/glass.shader")).toString();
     (Shader as any)._shaderLab = shaderLab;
