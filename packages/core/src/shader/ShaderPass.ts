@@ -13,10 +13,26 @@ import { ShaderProperty } from "./ShaderProperty";
 import { ShaderType } from "./enums/ShaderType";
 import { RenderState } from "./state/RenderState";
 
+interface IBenchmark {
+  getShaderProgram: number;
+  shaderLab2GLSL?: number;
+  webglCompileGLSL: number;
+  type: "ShaderLab" | "Canonical";
+  count: number;
+}
+
+const TEST_DATA: IBenchmark[] = [];
+const TEST_LIMIT = 100;
+let curBenchmark: IBenchmark;
+// @ts-ignore
+window.__TEST_DATA = TEST_DATA;
+
 /**
  * Shader pass containing vertex and fragment source.
  */
 export class ShaderPass extends ShaderPart {
+  private TEST_COUNT = 0;
+
   private static _shaderPassCounter: number = 0;
   /** @internal */
   static _shaderRootPath = "shaders://root/";
@@ -126,17 +142,25 @@ export class ShaderPass extends ShaderPart {
   _getShaderProgram(engine: Engine, macroCollection: ShaderMacroCollection): ShaderProgram {
     const shaderProgramPool = engine._getShaderProgramPool(this);
     let shaderProgram = shaderProgramPool.get(macroCollection);
-    if (shaderProgram) {
+    if (shaderProgram && this.TEST_COUNT >= TEST_LIMIT) {
       return shaderProgram;
     }
 
+    curBenchmark = {} as IBenchmark;
+    curBenchmark.count = this.TEST_COUNT;
+    let time = performance.now();
     if (this._type === ShaderType.Canonical) {
+      curBenchmark.type = "Canonical";
       shaderProgram = this._getCanonicalShaderProgram(engine, macroCollection);
     } else {
+      curBenchmark.type = "ShaderLab";
       shaderProgram = this._compileShaderProgram(engine, macroCollection, this._vertexEntry, this._fragmentEntry);
     }
+    curBenchmark.getShaderProgram = performance.now() - time;
+    TEST_DATA.push(curBenchmark);
 
     shaderProgramPool.cache(shaderProgram);
+    this.TEST_COUNT += 1;
     return shaderProgram;
   }
 
@@ -192,10 +216,14 @@ export class ShaderPass extends ShaderPart {
       platformMacros,
       new URL(path, ShaderPass._shaderRootPath).href
     );
+    curBenchmark.shaderLab2GLSL = performance.now() - start;
     Logger.info(`[ShaderLab compilation] cost time: ${performance.now() - start}ms`);
 
     if (shaderProgramSource) {
-      return new ShaderProgram(engine, shaderProgramSource.vertex, shaderProgramSource.fragment);
+      const time = performance.now();
+      const ret = new ShaderProgram(engine, shaderProgramSource.vertex, shaderProgramSource.fragment);
+      curBenchmark.webglCompileGLSL = performance.now() - time;
+      return ret;
     } else {
       return new ShaderProgram(engine, "", "");
     }
@@ -244,7 +272,9 @@ export class ShaderPass extends ShaderPart {
       fragmentSource = ShaderFactory.convertTo300(fragmentSource, true);
     }
 
+    const time = performance.now();
     const shaderProgram = new ShaderProgram(engine, vertexSource, fragmentSource);
+    curBenchmark.webglCompileGLSL = performance.now() - time;
 
     return shaderProgram;
   }
