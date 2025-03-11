@@ -29,6 +29,7 @@ import { RotationOverLifetimeModule } from "./modules/RotationOverLifetimeModule
 import { SizeOverLifetimeModule } from "./modules/SizeOverLifetimeModule";
 import { TextureSheetAnimationModule } from "./modules/TextureSheetAnimationModule";
 import { VelocityOverLifetimeModule } from "./modules/VelocityOverLifetimeModule";
+import { ForceOverLifetimeModule } from "./modules/ForceOverLifetimeModule";
 
 /**
  * Particle Generator.
@@ -58,6 +59,9 @@ export class ParticleGenerator {
   /** Velocity over lifetime module. */
   @deepClone
   readonly velocityOverLifetime: VelocityOverLifetimeModule;
+  /** Force over lifetime module */
+  @deepClone
+  readonly forceOverLifetime: ForceOverLifetimeModule;
   /** Size over lifetime module. */
   @deepClone
   readonly sizeOverLifetime: SizeOverLifetimeModule;
@@ -165,6 +169,7 @@ export class ParticleGenerator {
 
     this.main = new MainModule(this);
     this.velocityOverLifetime = new VelocityOverLifetimeModule(this);
+    this.forceOverLifetime = new ForceOverLifetimeModule(this);
     this.sizeOverLifetime = new SizeOverLifetimeModule(this);
 
     this.emission.enabled = true;
@@ -496,6 +501,7 @@ export class ParticleGenerator {
   _updateShaderData(shaderData: ShaderData): void {
     this.main._updateShaderData(shaderData);
     this.velocityOverLifetime._updateShaderData(shaderData);
+    this.forceOverLifetime._updateShaderData(shaderData);
     this.textureSheetAnimation._updateShaderData(shaderData);
     this.sizeOverLifetime._updateShaderData(shaderData);
     this.rotationOverLifetime._updateShaderData(shaderData);
@@ -511,6 +517,7 @@ export class ParticleGenerator {
     this.emission._resetRandomSeed(seed);
     this.textureSheetAnimation._resetRandomSeed(seed);
     this.velocityOverLifetime._resetRandomSeed(seed);
+    this.forceOverLifetime._resetRandomSeed(seed);
     this.rotationOverLifetime._resetRandomSeed(seed);
     this.colorOverLifetime._resetRandomSeed(seed);
   }
