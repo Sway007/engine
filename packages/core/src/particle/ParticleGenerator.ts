@@ -610,7 +610,9 @@ export class ParticleGenerator {
     }
 
     const maxLifetime = this.main.startLifetime._getMax();
-    this._addGravityToBounds(maxLifetime, bounds, bounds);
+    const { _transformedBounds: tmpBounds } = this._renderer;
+    tmpBounds.copyFrom(bounds);
+    this._addGravityToBounds(maxLifetime, tmpBounds, bounds);
   }
 
   /**
